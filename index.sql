@@ -20,18 +20,20 @@ qtde_eleitores int not null
 
 create table if not exists candidatos(
 id_partido int auto_increment unique primary key not null,
+nome varchar(55),
 numero int,
 constraint numero foreign key (numero) references partidos(numero),
-nome int,
-constraint nome foreign key (nome) references partidos(nome),
 id_cargo int,
 constraint id_cargo foreign key (id_cargo) references cargos(id_cargo)
 );
 
+ALTER TABLE zonas_secoes
+ADD INDEX idx_numero_secao (numero_secao);
+
 create table if not exists votacoes(
 id_candidato int auto_increment unique primary key not null,
 id_zona int,
-constraint id_zona foreign key (id_zona) references zonas_secoes(id_zona),
+constraint fk_id_zona foreign key (id_zona) references zonas_secoes(id_zona),
 numero_secao int,
 constraint numero_secao foreign key (numero_secao) references zonas_secoes(numero_secao),
 quantidade int not null
@@ -80,15 +82,3 @@ GROUP BY
 ORDER BY
     numero_partido,
     media_votos DESC;
-
-
-
-
-
-
-
-
-
-
-
-
