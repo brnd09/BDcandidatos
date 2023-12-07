@@ -1,5 +1,5 @@
-create schema cc1m0712;
-use provaDB;
+create schema eleicao;
+use eleicao;
 
 create table if not exists partidos(
 numero int auto_increment unique primary key not null,
